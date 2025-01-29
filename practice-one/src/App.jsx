@@ -68,9 +68,9 @@ const App = () => {
       <button>Gift</button>
     </form>
     <div>
-      {allFriends.map((el) => {
+      {allFriends.map((el, index) => {
         return (
-          <li>{el.name} - {el.gift} </li>
+          <li key={index}>{el.name} - {el.gift} </li>
 
         )
       })}
