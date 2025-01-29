@@ -1,35 +1,89 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+
+
+
+  let [newFriend, setNewFriend] = useState('')
+  let [allFriends, setFriends] = useState([{}])
+  let [isAssign, setAssign] = useState(false)
+  let gifts = ["Decoration", "firecrackers", "Anar", "bombs"]
+
+  let handleNewFriend = (event) => {
+    setNewFriend(event.target.value)
+
+  }
+
+
+  let handleSubmit = (event) => {
+    event.preventDefault();
+
+    setFriends((arr) => {
+      return [...arr, { name: newFriend, gift: "No gifts assigned" }]
+    });
+    setNewFriend('')
+  }
+
+
+
+  let handleAssign = () => {
+    if (!isAssign) {
+      setFriends((arr) => {
+        let newArr = arr.map((el) => {
+          el.gift = gifts[Math.floor(Math.random() * gifts.length)];
+          return { ...el };
+        })
+        return [...newArr]
+      })
+    }
+    setAssign(true)
+
+  }
+
+  let handleSuffer = () => {
+    setFriends((arr) => {
+      let newArr = arr.map((el) => {
+        el.gift = gifts[Math.floor(Math.random() * gifts.length)]
+        return { ...el }
+      })
+      return [...newArr]
+    })
+  }
+
+  let handleReset = () => {
+    setFriends((arr) => {
+      let newArr = arr.map((el) => {
+        el.gift = "No gifts assigned"
+        return { ...el }
+      })
+      return [...newArr]
+    })
+  }
+
+
+  return (<div>
+    <form onSubmit={handleSubmit}>
+      <input type="text" placeholder='Enter your friend name' onChange={handleNewFriend} value={newFriend} />
+      <button>Gift</button>
+    </form>
+    <div>
+      {allFriends.map((el) => {
+        return (
+          <li>{el.name} - {el.gift} </li>
+
+        )
+      })}
+
+      <div className='btns'>
+        <button onClick={handleAssign}>assign Gifts</button>
+        <button onClick={handleSuffer}>Suffer gifts</button>
+        <button onClick={handleReset}>reset</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
+  </div>
   )
 }
 
 export default App
+
