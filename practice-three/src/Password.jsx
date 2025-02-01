@@ -46,19 +46,19 @@
 
 
 
-import React from 'react'
-import { useState } from 'react'
+// import React from 'react'
+// import { useState } from 'react'
 
-const Password = () => {
+// const Password = () => {
 
-  const [showPassword, setShowPassword] = useState(false)
-  return (
+//   const [showPassword, setShowPassword] = useState(false)
+//   return (
 
-    <div>
-      <input type={showPassword ? "text" : "password"} />
-      <button onClick={() => setShowPassword(!showPassword)}>{showPassword ? "🙈" : "👁️"}</button>
-    </div>
-  )
-}
+//     <div>
+//       <input type={showPassword ? "text" : "password"} />
+//       <button onClick={() => setShowPassword(!showPassword)}>{showPassword ? "🙈" : "👁️"}</button>
+//     </div>
+//   )
+// }
 
-export default Password
+// export default Password
